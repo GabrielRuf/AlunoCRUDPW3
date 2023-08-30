@@ -91,16 +91,26 @@ public class Aluno {
         this.nota3 = nota3;
     }
 
+    private String calculaStatus(){
+        Double media = (nota1+nota2+nota3)/3;
+        if (media < 4)
+            return "Reprovado";
+        else
+            if (media < 6)
+                return "Recuperação";
+            else
+                return "Aprovado";
+    }
+
     @Override
     public String toString() {
-        return "Aluno{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", ra='" + ra + '\'' +
-                ", email='" + email + '\'' +
-                ", nota1=" + nota1 +
-                ", nota2=" + nota2 +
-                ", nota3=" + nota3 +
-                '}';
+        return  "nome: " + nome + '\n' +
+                "ra: " + ra + '\n' +
+                "email: " + email + '\n' +
+                "nota1: " + nota1 + '\n' +
+                "nota2: " + nota2 + '\n' +
+                "nota3: " + nota3 + '\n' +
+                "media: " + (nota1+nota2+nota3)/3 + '\n' +
+                "Situação: " + calculaStatus();
     }
 }

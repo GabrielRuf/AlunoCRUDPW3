@@ -14,12 +14,14 @@ public class AlunoDAO {
         Manager.getTransaction().begin();
         Manager.persist(aluno);
         Manager.getTransaction().commit();
+        System.out.println("Cadastrado!");
     }
     public void deletar(Integer id){
         Manager.getTransaction().begin();
         Aluno aluno = buscarPorId(id);
         Manager.remove(aluno);
         Manager.getTransaction().commit();
+        System.out.println("Deletado!");
     }
     public void editar(Aluno aluno){
         Manager.getTransaction().begin();
@@ -30,8 +32,14 @@ public class AlunoDAO {
         return Manager.find(Aluno.class, id);
     }
     public List<Aluno> buscarTodos() {
-        String jpql = "SELECT a FROM alunos a";
+        String jpql = "SELECT a FROM Aluno a";
         return Manager.createQuery(jpql, Aluno.class).getResultList();
+    }
+    public Aluno buscarUnicoPorNome(String nome) throws NoResultException {
+        String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
+        return Manager.createQuery(jpql, Aluno.class)
+                .setParameter("n", nome)
+                .getSingleResult();
     }
 
 }
